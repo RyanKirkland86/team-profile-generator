@@ -32,6 +32,12 @@ const promptUser = () =>
             name: 'email',
         },
         {
+            type: 'list',
+            message: "Would you like to add an Employee or Intern? Or would you like to finish building your team?",
+            name: 'menu',
+            choices: ['Employee', 'Intern', 'Build My Team'],
+        },
+        {
             type: 'input',
             message: "What is your team manager's office number?",
             name: 'officeNumber',
