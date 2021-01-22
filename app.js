@@ -16,6 +16,7 @@ const render = require("./lib/htmlRenderer");
 
 const promptUser = () =>
     inquirer.prompt([
+    //These questions are what everyone will get. Starting with the manager. Maybe chain this as a promise?
         {
             type: 'input',
             message: "What is your name?",
@@ -31,22 +32,28 @@ const promptUser = () =>
             message: "What is your email address?",
             name: 'email',
         },
+    //The next question will be about the manager's office number.
+        {
+            type: 'input',
+            message: "What is your team manager's office number?",
+            name: 'officeNumber',
+        },
+    //After the manager enters their office number, the menu of choices pops up.
         {
             type: 'list',
             message: "Would you like to add an Employee or Intern? Or would you like to finish building your team?",
             name: 'menu',
             choices: ['Employee', 'Intern', 'Build My Team'],
         },
-        {
-            type: 'input',
-            message: "What is your team manager's office number?",
-            name: 'officeNumber',
-        },
+    //If the manager chooses Build My Team, then we exit and execute the render function.
+
+    //This is the Employee question
         {
             type: 'input',
             message: "What is your GitHub username?",
             name: 'github',
         },
+    //This is the Intern question.
         {
             type: 'input',
             message: "What school do you attend?",
