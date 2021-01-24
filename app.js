@@ -19,8 +19,6 @@ let employees = [];
 
 const promptManager = () =>
 
-    console.log("Welcome team manager! Let's add your info first:");
-
     inquirer.prompt([
     //These questions are what everyone will get. Starting with the manager. Maybe chain this as a promise?
         {
@@ -43,10 +41,9 @@ const promptManager = () =>
             type: 'input',
             message: "What is your office number?",
             name: 'officeNumber',
-            when: (answer) => answer.role === 'Manager',
         },
     ]).then((data) => {
-        const manager = new Manager(data.name, data.id, data.email, data.oficeNumber);
+        const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
         employees.push(manager);
         console.log(employees);
     //Then the manager needs to decide what role they want to add to their team, or if they want to finish
@@ -61,9 +58,17 @@ const makeTeam = () =>
             type: 'list',
             message: "Would you like to add an Employee or Intern? Or would you like to finish building your team?",
             name: 'menu',
-            choices: ['Employee', 'Intern', 'Build My Team'],
+            choices: ['Engineer', 'Intern', 'Build My Team'],
         },
-    ])
+    ]).then((data) => {
+        if (data.menu == 'Engineer') {
+            makeEmployee();
+        } else if (data.menu == 'Intern') {
+            makeIntern();
+        } else {
+            fs.writeFileSync(outputPath, render(employees), "utf-8");
+        }
+    });
     //After the manager enters their office number, the menu of choices pops up.
         
     //If the manager chooses Build My Team, then we exit and execute the render function.
@@ -72,27 +77,28 @@ const makeEmployee = () =>
     //These questions are what everyone will get. Starting with the manager. Maybe chain this as a promise?
         {
             type: 'input',
-            message: "What is the employee's name?",
+            message: "What is the engineer's name?",
             name: 'name',
         },
         {
             type: 'input',
-            message: "What is the employee's ID number?",
+            message: "What is the engineer's ID number?",
             name: 'id',
         },
         {
             type: 'input',
-            message: "What is the employee's email address?",
+            message: "What is the engineer's email address?",
             name: 'email',
         },
         {
             type: 'input',
-            message: "What is the employee's GitHub username?",
+            message: "What is the engineer's GitHub username?",
             name: 'github',
         },
     ]).then((data) => {
-        const emp = new Employee(data.name, data.id, data.email, data.github);
-        employees.push(emp);
+        const engineer = new Engineer(data.name, data.id, data.email, data.github);
+        employees.push(engineer);
+        console.log(employees);
         makeTeam();
     });
 
@@ -121,8 +127,9 @@ const makeIntern = () =>
             name: 'school',
         },
     ]).then((data) => {
-        const int = new Intern(data.name, data.id, data.email, data.school);
-        employees.push(int);
+        const intern = new Intern(data.name, data.id, data.email, data.school);
+        employees.push(intern);
+        console.log(employees);
         makeTeam();
     });
 
