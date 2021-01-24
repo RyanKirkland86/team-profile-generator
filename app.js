@@ -120,7 +120,11 @@ const makeIntern = () =>
             message: "What school does the intern attend?",
             name: 'school',
         },
-    ]);
+    ]).then((data) => {
+        const int = new Intern(data.name, data.id, data.email, data.school);
+        employees.push(int);
+        makeTeam();
+    });
 
 
 
