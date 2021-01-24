@@ -18,6 +18,9 @@ let employees = [];
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 const promptManager = () =>
+
+    console.log("Welcome team manager! Let's add your info first:");
+
     inquirer.prompt([
     //These questions are what everyone will get. Starting with the manager. Maybe chain this as a promise?
         {
@@ -27,7 +30,7 @@ const promptManager = () =>
         },
         {
             type: 'input',
-            message: "What is your employee ID?",
+            message: "What is your employee ID number?",
             name: 'id',
         },
         {
@@ -38,7 +41,7 @@ const promptManager = () =>
     //The next question will be about the manager's office number.
         {
             type: 'input',
-            message: "What is your team manager's office number?",
+            message: "What is your office number?",
             name: 'officeNumber',
             when: (answer) => answer.role === 'Manager',
         },
@@ -69,33 +72,52 @@ const makeEmployee = () =>
     //These questions are what everyone will get. Starting with the manager. Maybe chain this as a promise?
         {
             type: 'input',
-            message: "What is your name?",
+            message: "What is the employee's name?",
             name: 'name',
         },
         {
             type: 'input',
-            message: "What is your employee ID?",
+            message: "What is the employee's ID number?",
             name: 'id',
         },
         {
             type: 'input',
-            message: "What is your email address?",
+            message: "What is the employee's email address?",
             name: 'email',
         },
         {
             type: 'input',
-            message: "What is your GitHub username?",
+            message: "What is the employee's GitHub username?",
             name: 'github',
         },
     ]).then((data) => {
         const emp = new Employee(data.name, data.id, data.email, data.github);
         employees.push(emp);
         makeTeam();
-    })
+    });
+
+const makeIntern = () =>
+    inquirer.prompt([
+    //These questions are what everyone will get. Starting with the manager. Maybe chain this as a promise?
+        {
+            type: 'input',
+            message: "What is the intern's name?",
+            name: 'name',
+        },
+        {
+            type: 'input',
+            message: "What is the intern's ID number?",
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: "What is the intern's email address?",
+            name: 'email',
+        },
     //This is the Intern question.
         {
             type: 'input',
-            message: "What school do you attend?",
+            message: "What school does the intern attend?",
             name: 'school',
         },
     ]);
