@@ -9,8 +9,9 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/employee");
 
-let team = [];
+let employees = [];
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -39,22 +40,58 @@ const promptManager = () =>
             type: 'input',
             message: "What is your team manager's office number?",
             name: 'officeNumber',
+            when: (answer) => answer.role === 'Manager',
         },
-    //After the manager enters their office number, the menu of choices pops up.
+    ]).then((data) => {
+        const manager = new Manager(data.name, data.id, data.email, data.oficeNumber);
+        employees.push(manager);
+        console.log(employees);
+    //Then the manager needs to decide what role they want to add to their team, or if they want to finish
+        makeTeam();
+    });
+
+promptManager();
+
+const makeTeam = () =>
+    inquirer.prompt([
         {
             type: 'list',
             message: "Would you like to add an Employee or Intern? Or would you like to finish building your team?",
             name: 'menu',
             choices: ['Employee', 'Intern', 'Build My Team'],
         },
+    ])
+    //After the manager enters their office number, the menu of choices pops up.
+        
     //If the manager chooses Build My Team, then we exit and execute the render function.
-
-    //This is the Employee question
+const makeEmployee = () =>
+    inquirer.prompt([
+    //These questions are what everyone will get. Starting with the manager. Maybe chain this as a promise?
+        {
+            type: 'input',
+            message: "What is your name?",
+            name: 'name',
+        },
+        {
+            type: 'input',
+            message: "What is your employee ID?",
+            name: 'id',
+        },
+        {
+            type: 'input',
+            message: "What is your email address?",
+            name: 'email',
+        },
         {
             type: 'input',
             message: "What is your GitHub username?",
             name: 'github',
         },
+    ]).then((data) => {
+        const emp = new Employee(data.name, data.id, data.email, data.github);
+        employees.push(emp);
+        makeTeam();
+    })
     //This is the Intern question.
         {
             type: 'input',
@@ -63,7 +100,7 @@ const promptManager = () =>
         },
     ]);
 
-promptManager();
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
