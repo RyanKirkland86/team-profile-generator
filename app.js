@@ -62,7 +62,7 @@ const makeTeam = () =>
         },
     ]).then((data) => {
         if (data.menu == 'Engineer') {
-            makeEmployee();
+            makeEngineer();
         } else if (data.menu == 'Intern') {
             makeIntern();
         } else {
@@ -72,7 +72,7 @@ const makeTeam = () =>
     //After the manager enters their office number, the menu of choices pops up.
         
     //If the manager chooses Build My Team, then we exit and execute the render function.
-const makeEmployee = () =>
+const makeEngineer = () =>
     inquirer.prompt([
     //These questions are what everyone will get. Starting with the manager. Maybe chain this as a promise?
         {
