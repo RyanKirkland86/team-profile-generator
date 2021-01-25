@@ -8,7 +8,7 @@ This project is a Node.js command line application that dynamically generates an
 
 ![Image](https://github.com/RyanKirkland86/team-profile-generator/blob/main/Assets/Sample%20Team%20Page.jpg)
 
-![Image](https://github.com/RyanKirkland86/team-profile-generator/blob/main/Assets/Team%20Profile%20Generator%20DEMO%20Video.mov)
+[VideoDEMO](https://github.com/RyanKirkland86/team-profile-generator/blob/main/Assets/Team%20Profile%20Generator%20DEMO%20Video.mov)
 
 <br>
 
