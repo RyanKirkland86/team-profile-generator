@@ -24,6 +24,8 @@ To install the necessary dependencies, open Terminal/GitBash and enter this code
 
 ```
 npm install inquirer
+
+npm install jest
 ```
 
 ## Process:
