@@ -55,7 +55,7 @@ const makeTeam = () =>
     inquirer.prompt([
         {
             type: 'list',
-            message: "Would you like to add an Employee or Intern? Or would you like to finish building your team?",
+            message: "Would you like to add an Engineer or Intern to your team? Or would you like to finish building your team?",
             name: 'menu',
             choices: ['Engineer', 'Intern', 'Build My Team'],
         },
