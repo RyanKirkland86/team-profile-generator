@@ -13,9 +13,14 @@ const Employee = require("./lib/employee");
 
 let employees = [];
 
+
+// Write code to use inquirer to gather information about the development team members,
+// and to create objects for each team member (using the correct classes as blueprints!)
+
 const promptManager = () =>
 
     inquirer.prompt([
+    //These questions are what everyone will get. Starting with the manager.
         {
             type: 'input',
             message: "What is your name?",
@@ -31,6 +36,7 @@ const promptManager = () =>
             message: "What is your email address?",
             name: 'email',
         },
+    //The next question will be about the manager's office number.
         {
             type: 'input',
             message: "What is your office number?",
@@ -60,7 +66,7 @@ const makeTeam = () =>
         } else if (data.menu == 'Intern') {
             makeIntern();
         } 
-    //If the manager chooses Build My Team, then we exit and execute the render function.
+
         else {
             fs.writeFileSync(outputPath, render(employees), "utf-8");
         }
